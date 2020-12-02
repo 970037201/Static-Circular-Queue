@@ -1,4 +1,4 @@
-# Static-Circular-Queue
+# Static and Circular Queue
   A small and simple Circular queue for embedded systems - with error safe code and no dynamic allocation.
 
   A circular queue is just a neat use of the '%' (Modulo) operator to negate the use of memory reordering and moving.
