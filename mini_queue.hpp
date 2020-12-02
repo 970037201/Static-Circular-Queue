@@ -19,7 +19,7 @@ public:
 	inline T* head() { return size() ? &A[F] : 0; }//get pointer to beginning element, returns NULL pointer on failure
 	inline const T* head() const { return head(); }//constant version of other head()
 	inline T* back() { return size() ? &A[(R + S - 1) % S] : 0; }//get pointer to last element, returns NULL pointer on failure
-	inline const T* back() const { return rear(); }//constant version of back()
+	inline const T* back() const { return back(); }//constant version of back()
 		//Capacity reading - Not needed for functioning class
-	inline size_t max() consteval { return S; }
+	constexpr inline size_t max() const { return S; }
 };
