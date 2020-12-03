@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
-#include <C:\C++ dependencies\mini_queue.hpp>
+#include <C:\...\mini_queue.hpp>
 
 //Here have a test.
 //Compile & run to test the mini_queue.hpp class.
