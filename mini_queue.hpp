@@ -8,7 +8,7 @@
 template <class T, size_t L>
 class alignas(alignof(T)) mini_queue {
 	size_t F, S;//First element, and size of queue
-	T A[L];
+	T A[L];//Array
 public:
 		//Constructor
 	constexpr mini_queue() :F(0), S(0), A() {}
