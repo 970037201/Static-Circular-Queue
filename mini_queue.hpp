@@ -1,25 +1,27 @@
 #pragma once
+//A small class for managing a circular Queue.
 
-//Small n' Static Circular Queue
-//No dynamic allocations, if you really wanted to know...
-//No license, use at your own risk
-//Programmer: Eric Petersen
-template <class T, size_t S> //T is the variable to store, S is the max size of your queue
+//Think it is wrong? Go over your code again.
+//You get an error? Use C++, not Python.
+//Class acting funky? Check the return values.
+
+template <class T, size_t L>
 class alignas(alignof(T)) mini_queue {
-	size_t F, R;//Front and Rear variables
-	T A[S];//Array to hold T variables, with size S
+	size_t F, S;//First element, and size of queue
+	T A[L];
 public:
 		//Constructor
-	constexpr mini_queue() : F(0), R(0), A() {}//initialize all to zero
-		//Minimal - push, pull, and size
-	inline bool push(const T& V) { return size() <= S ? &(A[(R %= S)++] = V) : 0; }//adds to queue, returns true on success
-	inline T pull() { return R != F ? A[(F %= S)++] : T(); }//take from front of Queue, returns new initialized object on failure
-	inline size_t size() const { return F > R ? S - F + R : R - F; }//get number of stored elements inside queue
-		//Head and rear reading - Not needed for functioning class
-	inline T* head() { return size() ? &A[F] : 0; }//get pointer to beginning element, returns NULL pointer on failure
-	inline const T* head() const { return head(); }//constant version of other head()
-	inline T* back() { return size() ? &A[(R + S - 1) % S] : 0; }//get pointer to last element, returns NULL pointer on failure
-	inline const T* back() const { return back(); }//constant version of back()
-		//Capacity reading - Not needed for functioning class
-	constexpr inline size_t max() const { return S; }
+	constexpr mini_queue() :F(0), S(0), A() {}
+		//Standard behavior
+	inline bool push(const T& V) { return S < L ? &(A[(F + S++) % L] = V) : 0; }
+	inline T pull() { return (S ? S-- : 0) ? A[(F %= L)++] : T(); }
+		//Size and maximum size
+	inline size_t size() const { return S; }
+	constexpr inline size_t max_size() const { return L; }
+		//Last and First inserted items (Returns 0 on failure)
+	inline T* last() { return S ? A + (F + (S - 1)) % L : 0; }
+	inline T* first() { return S ? A + F % L : 0; }
+		//Constant first() and last(): Requires non-const last() and first()
+	inline const T* last() const { return last(); }
+	inline const T* first() const { return first(); }
 };
